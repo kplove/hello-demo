@@ -1,0 +1,13 @@
+steps:
+  # build the container image
+- name: "gcr.io/cloud-builders/docker"
+  args: ["build", "-t", "gcr.io/devtools-317213/github.com/sharmamohitkr700/hello-world:latest", "."]
+  # push container image
+- name: "gcr.io/cloud-builders/docker"
+  args: ["push", "gcr.io/devtools-317213/github.com/sharmamohitkr700/hello-world:latest"]
+  # deploy container image to GKE
+- name: "gcr.io/cloud-builders/gke-deploy"
+  args:
+  - run
+  - --filename=my-deployment.yaml
+  - --image=gcr.io/devtools-317213/github
